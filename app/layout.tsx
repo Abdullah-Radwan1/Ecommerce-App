@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import "./globals.css";
-
+import { NavigationMenuDemo } from "@/components/NavBar";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -16,7 +16,12 @@ export default function RootLayout({
 }>) {
  return (
   <html lang="en">
-   <body className={cn(` min-h-screen antialiased font-sans`)}>{children}</body>
+   <body className={cn(` min-h-screen antialiased font-sans`)}>
+    <NavigationMenuDemo />
+    {children}
+   </body>
   </html>
  );
 }
+
+////

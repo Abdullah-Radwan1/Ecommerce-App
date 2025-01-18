@@ -112,6 +112,8 @@ export async function ToggleProductAvailability(
  isAvailableForPurchase: boolean
 ) {
  await db.product.update({ where: { id }, data: { isAvailableForPurchase } });
+ revalidatePath("/");
+ revalidatePath("/products");
 }
 
 export async function DeleteProduct(id: string) {

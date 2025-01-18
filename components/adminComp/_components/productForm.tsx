@@ -24,8 +24,11 @@ export function ProductForm({ product }: { product?: Product | null }) {
  );
 
  return (
-  <form action={action} className="space-y-8">
-   <div className="space-y-2">
+  <form
+   action={action}
+   className="space-y-5 max-w-lg m-auto border border-gray-200 rounded-lg p-4 mt-6"
+  >
+   <div className="space-y-1">
     <Label htmlFor="name">Name</Label>
     <Input
      type="text"
@@ -35,7 +38,7 @@ export function ProductForm({ product }: { product?: Product | null }) {
     />
     {error.name && <div className="text-destructive">{error.name}</div>}
    </div>
-   <div className="space-y-2">
+   <div className="space-y-1">
     <Label htmlFor="priceInCents">Price In Cents</Label>
     <Input
      type="number"
@@ -44,14 +47,14 @@ export function ProductForm({ product }: { product?: Product | null }) {
      value={priceInCents || 0}
      onChange={(e) => setPriceInCents(Number(e.target.value) || undefined)}
     />
-    <div className="text-muted-foreground">
+    <div className="text-muted-foreground mt-2">
      {formatCurrency((priceInCents || 0) / 100)}
     </div>
    </div>
    {error.priceInCents && (
     <div className="text-destructive">{error.priceInCents}</div>
    )}
-   <div className="space-y-2">
+   <div className="space-y-1">
     <Label htmlFor="description">Description</Label>
     <Textarea
      id="description"
@@ -62,18 +65,19 @@ export function ProductForm({ product }: { product?: Product | null }) {
      <div className="text-destructive">{error.description}</div>
     )}
    </div>
-   <div className="space-y-2">
+   <div className="space-y-1">
     <Label htmlFor="file">File</Label>
     <Input type="file" id="file" name="file" required={product == null} />
     {product != null && (
-     <div className="text-muted-foreground">{product.filePath}</div>
+     <div className="text-muted-foreground mt-2">{product.filePath}</div>
     )}
    </div>
-   <div className="space-y-2">
+   <div className="space-y-1">
     <Label htmlFor="image">Image</Label>
     <Input type="file" id="image" name="image" required={product == null} />
     {product != null && (
      <Image
+      className=" m-auto rounded-lg mt-2"
       src={product.imagePath}
       height="400"
       width="400"

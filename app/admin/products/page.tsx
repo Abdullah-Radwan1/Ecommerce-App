@@ -14,19 +14,23 @@ import { PageHeader } from "../../../components/adminComp/_components/PageHeader
 import { CheckCircle2, MoreVertical, XCircle } from "lucide-react";
 
 import { formatCurrency, formatNumber } from "@/components/Formatter";
-import { ActiveToggleDropDownItem, DeleteDropdownItem } from "./productAction";
+import {
+ ActiveToggleDropDownItem,
+ DeleteProductDropdownItem,
+} from "./productAction";
 import {
  DropdownMenu,
  DropdownMenuContent,
  DropdownMenuItem,
  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { DropdownMenuDemo } from "@/components/adminComp/_components/DropDown";
 
 const Page = () => {
  return (
-  <>
+  <div className="max-w-2xl m-auto mt-5">
    {/* Page Header */}
-   <div className="flex justify-between p-4 items-center">
+   <div className="flex justify-between p-4 items-center  ">
     <PageHeader>Products</PageHeader>
     <Button asChild>
      <Link href="/admin/products/new">Add</Link>
@@ -35,7 +39,7 @@ const Page = () => {
 
    {/* Product Table */}
    <ProductTable />
-  </>
+  </div>
  );
 };
 
@@ -101,32 +105,10 @@ async function ProductTable() {
 
         {/* Actions Dropdown */}
         <TableCell>
-         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-           <button>
-            <MoreVertical />
-            <span className="sr-only">Actions</span>
-           </button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-           <DropdownMenuItem asChild>
-            <a download href={`/admin/products/${product.id}/download`}>
-             Download
-            </a>
-           </DropdownMenuItem>
-           <DropdownMenuItem asChild>
-            <Link href={`/admin/products/${product.id}/edit`}>Edit</Link>
-           </DropdownMenuItem>
-           <ActiveToggleDropDownItem
-            id={product.id}
-            isAvailable={product.isAvailableForPurchase}
-           />
-           <DeleteDropdownItem
-            id={product.id}
-            disabled={product._count.orders > 0}
-           />
-          </DropdownMenuContent>
-         </DropdownMenu>
+         <DropdownMenuDemo
+          isAvailableForPurchase={product.isAvailableForPurchase}
+          productId={product.id}
+         />
         </TableCell>
        </TableRow>
       ))}

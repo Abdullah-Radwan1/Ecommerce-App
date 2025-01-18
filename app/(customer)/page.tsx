@@ -6,9 +6,9 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ProductCard, ProductCardSkeleton } from "@/components/ui/ProductCard";
 import { cache } from "@/lib/cache";
+import Image from "next/image";
 
 export default async () => {
- console.log("customer page ");
  const newestProducts = cache(() => {
   return db.product.findMany({
    where: { isAvailableForPurchase: true },
@@ -16,28 +16,10 @@ export default async () => {
    take: 4,
   });
  }, ["/", "newestProducts"]);
- const mostPopular = cache(
-  () => {
-   return db.product.findMany({
-    where: { isAvailableForPurchase: true },
-    orderBy: { orders: { _count: "desc" } },
-    take: 4,
-   });
-  },
-  ["/", "mostPopular"],
-  { revalidate: 60 * 60 }
- );
 
  return (
   <div className="space-y-12 ">
-   <ProductGridSection
-    title="newst products"
-    productsFetcher={newestProducts}
-   />
-   <ProductGridSection
-    title="featured Products"
-    productsFetcher={mostPopular}
-   />
+   <ProductGridSection title="our products" productsFetcher={newestProducts} />
   </div>
  );
 };
@@ -86,7 +68,11 @@ async function ProductSuspense({
  productsFetcher: () => Promise<Product[]>;
 }) {
  const products = await productsFetcher();
- return products.map((product) => (
-  <ProductCard key={product.id} {...product} />
- ));
+ return products.map((product) =>
+  products.length < 3 ? (
+   "no products"
+  ) : (
+   <ProductCard key={product.id} {...product} />
+  )
+ );
 }

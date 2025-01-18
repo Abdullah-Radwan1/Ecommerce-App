@@ -57,13 +57,3 @@
   --chart-5: 340 75% 55%;
  }
 }
-
-@layer base {
- * {
-  @apply border-border;
- }
- body {
-  background-color: rgb(6, 6, 6);
-  color: white;
- }
-}

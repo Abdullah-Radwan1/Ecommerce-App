@@ -1,5 +1,5 @@
 import React from "react";
-import { ProductForm } from "../../../../components/adminComp/_components/productForm";
+import { ProductForm } from "@/components/adminComp/_components/productForm";
 
 const page = () => {
  return (

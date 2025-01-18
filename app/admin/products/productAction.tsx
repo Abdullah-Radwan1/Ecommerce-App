@@ -30,7 +30,7 @@ export function ActiveToggleDropDownItem({
  );
 }
 
-export function DeleteDropdownItem({
+export function DeleteProductDropdownItem({
  id,
  disabled,
 }: {
